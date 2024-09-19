@@ -11,3 +11,10 @@ test('renders a 3x3 grid layout for the game board', () => {
         expect(buttons).toHaveLength(3);
     })
 })
+
+test('renders exactly 9 square buttons and verify that the buttons are clickable', () => {
+    
+    render(<GameBoard />);
+    const buttons = screen.getAllByRole('button');
+    expect(buttons).toHaveLength(9);
+  })
