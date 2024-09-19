@@ -17,6 +17,7 @@ const GameBoard = () => {
 
     return (
         <div role="grid">
+            <h1>Tic Tac Toe Game</h1>
             {renderRow(0)}
             {renderRow(3)}
             {renderRow(6)}

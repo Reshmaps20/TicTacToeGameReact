@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import GameBoard from './GameBoard';
 
 test('renders a 3x3 grid layout for the game board', () => {
@@ -28,3 +29,14 @@ test('initially renders the squares with empty values', () => {
         expect(square.textContent.trim()).toBe('');
     })
 })
+
+test('renders the title "Tic Tac Toe Game" at the top of the game board', () => {
+    
+    render(<GameBoard />);
+    const titleElement = screen.getByText(/Tic Tac Toe Game/i);
+    expect(titleElement).toBeInTheDocument();
+    const rows = screen.getAllByRole('row');
+    const boardElement = rows[0];
+    expect(titleElement).toBeInTheDocument();
+    expect(titleElement.compareDocumentPosition(boardElement) & Node.DOCUMENT_POSITION_FOLLOWING).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+  });
