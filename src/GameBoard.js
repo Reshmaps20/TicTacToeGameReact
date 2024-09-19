@@ -5,6 +5,11 @@ const GameBoard = () => {
     const [squares, setSquares] = useState(Array(9).fill(null));
 
     const handleClick = (index) => {
+        const newSquares = squares.slice();
+        if (newSquares[index] === null) {
+            newSquares[index] = 'X';
+            setSquares(newSquares);
+        }
     };
 
     const renderRow = (i) => (

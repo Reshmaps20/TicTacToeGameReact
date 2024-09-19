@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import GameBoard from './GameBoard';
 
@@ -40,6 +40,15 @@ describe('GameBoard Component', () => {
         const boardElement = rows[0];
         expect(titleElement).toBeInTheDocument();
         expect(titleElement.compareDocumentPosition(boardElement) & Node.DOCUMENT_POSITION_FOLLOWING).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    })
+
+    test('each square button should displays "X" initially when clicked', () => {
+
+        const buttons = screen.getAllByRole('button');
+        fireEvent.click(buttons[0]);
+        expect(buttons[0]).toHaveTextContent('X');
+        fireEvent.click(buttons[0]);
+        expect(buttons[0]).toHaveTextContent('X');
     })
 
 })
