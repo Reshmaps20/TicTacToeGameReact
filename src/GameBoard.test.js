@@ -51,4 +51,13 @@ describe('GameBoard Component', () => {
         expect(buttons[0]).toHaveTextContent('X');
     })
 
+    test('each square button is clickable and changes its value to "X" or "O"', () => {
+      
+        const buttons = screen.getAllByRole('button');
+        fireEvent.click(buttons[0]);
+        expect(buttons[0]).toHaveTextContent('X');
+        fireEvent.click(buttons[1]);
+        expect(buttons[1]).toHaveTextContent('O');
+    })
+
 })

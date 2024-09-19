@@ -3,12 +3,14 @@ import './Board.css';
 
 const GameBoard = () => {
     const [squares, setSquares] = useState(Array(9).fill(null));
+    const [isXNext, setIsXNext] = useState(true);
 
     const handleClick = (index) => {
         const newSquares = squares.slice();
         if (newSquares[index] === null) {
-            newSquares[index] = 'X';
+            newSquares[index] = isXNext ? 'X' : 'O';
             setSquares(newSquares);
+            setIsXNext(!isXNext);
         }
     };
 
