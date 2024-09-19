@@ -39,4 +39,4 @@ test('renders the title "Tic Tac Toe Game" at the top of the game board', () => 
     const boardElement = rows[0];
     expect(titleElement).toBeInTheDocument();
     expect(titleElement.compareDocumentPosition(boardElement) & Node.DOCUMENT_POSITION_FOLLOWING).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-  });
+});
