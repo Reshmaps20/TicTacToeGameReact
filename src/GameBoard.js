@@ -25,6 +25,7 @@ const GameBoard = () => {
     return (
         <div role="grid">
             <h1>Tic Tac Toe Game</h1>
+            <div role="status" className="status">Next player: {isXNext ? 'X' : 'O'}</div>
             {renderRow(0)}
             {renderRow(3)}
             {renderRow(6)}

@@ -60,4 +60,15 @@ describe('GameBoard Component', () => {
         expect(buttons[1]).toHaveTextContent('O');
     })
 
+    test('status of next player after a move should be displayed in the screen', () => {
+      
+        const statusElement = screen.getByText(/Next player:/i);
+        expect(statusElement).toHaveTextContent('Next player: X');
+        const buttons = screen.getAllByRole('button');
+        fireEvent.click(buttons[0]);
+        expect(statusElement).toHaveTextContent('Next player: O');
+        fireEvent.click(buttons[1]);
+        expect(statusElement).toHaveTextContent('Next player: X');
+    })
+
 })
