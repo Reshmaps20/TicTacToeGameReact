@@ -52,7 +52,7 @@ describe('GameBoard Component', () => {
     })
 
     test('each square button is clickable and changes its value to "X" or "O"', () => {
-      
+
         const buttons = screen.getAllByRole('button');
         fireEvent.click(buttons[0]);
         expect(buttons[0]).toHaveTextContent('X');
@@ -61,7 +61,7 @@ describe('GameBoard Component', () => {
     })
 
     test('status of next player after a move should be displayed in the screen', () => {
-      
+
         const statusElement = screen.getByText(/Next player:/i);
         expect(statusElement).toHaveTextContent('Next player: X');
         const buttons = screen.getAllByRole('button');
@@ -69,6 +69,17 @@ describe('GameBoard Component', () => {
         expect(statusElement).toHaveTextContent('Next player: O');
         fireEvent.click(buttons[1]);
         expect(statusElement).toHaveTextContent('Next player: X');
+    })
+
+    test('clicking on a square that already has a value does not change the value', () => {
+
+        const buttons = screen.getAllByRole('button');
+        fireEvent.click(buttons[0]);
+        expect(buttons[0]).toHaveTextContent('X');
+        fireEvent.click(buttons[0]);
+        expect(buttons[0]).toHaveTextContent('X');
+        fireEvent.click(buttons[1]);
+        expect(buttons[1]).toHaveTextContent('O');
     })
 
 })
