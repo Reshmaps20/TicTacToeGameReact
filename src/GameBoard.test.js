@@ -110,4 +110,18 @@ describe('GameBoard Component', () => {
         const statusElement = screen.getByRole('status');
         expect(statusElement).toHaveTextContent('Winner: X');
     })
+
+    test('the game is won when all fields in a columns are taken by a player' , () => {
+      
+        const buttons = screen.getAllByRole('button');
+      
+        fireEvent.click(buttons[0]); 
+        fireEvent.click(buttons[1]); 
+        fireEvent.click(buttons[3]); 
+        fireEvent.click(buttons[4]); 
+        fireEvent.click(buttons[6]); 
+      
+        const statusElement = screen.getByRole('status');
+        expect(statusElement).toHaveTextContent('Winner: X');
+    })
 })
