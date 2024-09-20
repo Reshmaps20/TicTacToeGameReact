@@ -97,4 +97,17 @@ describe('GameBoard Component', () => {
         expect(winner).toBe('X');
     })
 
+    test('display the winner correctly on the screen', () => {
+      
+        const buttons = screen.getAllByRole('button');
+      
+        fireEvent.click(buttons[0]); 
+        fireEvent.click(buttons[3]); 
+        fireEvent.click(buttons[1]); 
+        fireEvent.click(buttons[4]); 
+        fireEvent.click(buttons[2]); 
+      
+        const statusElement = screen.getByRole('status');
+        expect(statusElement).toHaveTextContent('Winner: X');
+    })
 })
