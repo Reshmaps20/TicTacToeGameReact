@@ -82,4 +82,19 @@ describe('GameBoard Component', () => {
         expect(buttons[1]).toHaveTextContent('O');
     })
 
+    test('the game is won when all fields in a row are taken by a player' , () => {
+      
+        const buttons = screen.getAllByRole('button');
+      
+        fireEvent.click(buttons[0]); 
+        fireEvent.click(buttons[3]); 
+        fireEvent.click(buttons[1]); 
+        fireEvent.click(buttons[4]); 
+        fireEvent.click(buttons[2]); 
+      
+        const winningSquares = buttons.map(button => button.textContent);
+        const winner = winningSquares[0]; 
+        expect(winner).toBe('X');
+    })
+
 })

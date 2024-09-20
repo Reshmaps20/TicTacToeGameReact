@@ -4,12 +4,15 @@ import './Board.css';
 const GameBoard = () => {
     const [squares, setSquares] = useState(Array(9).fill(null));
     const [isXNext, setIsXNext] = useState(true);
+    const [winner, setWinner] = useState(null);
 
     const handleClick = (index) => {
         const newSquares = squares.slice();
         if (newSquares[index] === null) {
             newSquares[index] = isXNext ? 'X' : 'O';
             setSquares(newSquares);
+            const winner = calculateWinner(newSquares);
+            setWinner(winner);
             setIsXNext(!isXNext);
         }
     };
@@ -31,6 +34,19 @@ const GameBoard = () => {
             {renderRow(6)}
         </div>
     );
+
+    function calculateWinner(squares) {
+        const lines = [
+          [0, 1, 2], [3, 4, 5], [6, 7, 8],
+        ];
+        for (let i = 0; i < lines.length; i++) {
+          const [a, b, c] = lines[i];
+          if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+            return squares[a];  
+          }
+        }
+        return null;
+      }
 };
 
 export default GameBoard;
