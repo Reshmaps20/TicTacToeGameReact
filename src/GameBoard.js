@@ -4,9 +4,10 @@ import './Board.css';
 const GameBoard = () => {
     const [squares, setSquares] = useState(Array(9).fill(null));
     const [isXNext, setIsXNext] = useState(true);
-    const [winner, setWinner] = useState(null);
-    const [isDraw, setIsDraw] = useState(false); 
+    const [status, setStatus] = useState("Next player: X");
 
+    const winner = calculateWinner(squares);
+    
     const handleClick = (index) => {
 
         if (squares[index] || winner) {
@@ -16,14 +17,15 @@ const GameBoard = () => {
         const newSquares = squares.slice();
         newSquares[index] = isXNext ? 'X' : 'O';
         setSquares(newSquares);
+        setIsXNext(!isXNext);
 
         const gameWinner = calculateWinner(newSquares);
         if (gameWinner) {
-            setWinner(gameWinner);
+            setStatus(`Winner: ${isXNext ? 'X' : 'O'}`);
         } else if (newSquares.every(square => square !== null)) {
-            setIsDraw(true); 
+            setStatus("Game is a Draw");
         } else {
-            setIsXNext(!isXNext);
+            setStatus(`Next player: ${isXNext ? 'O' : 'X'}`);
         }
     };
 
@@ -38,7 +40,7 @@ const GameBoard = () => {
     return (
         <div role="grid">
             <h1>Tic Tac Toe Game</h1>
-            <div role="status" className="status"> {winner ? `Winner: ${winner}` : isDraw ? "Game is a Draw" : `Next player: ${isXNext ? 'X' : 'O'}`}</div>
+            <div role="status" className="status">{status}</div>
             {renderRow(0)}
             {renderRow(3)}
             {renderRow(6)}
@@ -47,18 +49,18 @@ const GameBoard = () => {
 
     function calculateWinner(squares) {
         const lines = [
-          [0, 1, 2], [3, 4, 5], [6, 7, 8],
-          [0, 3, 6], [1, 4, 7], [2, 5, 8],
-          [0, 4, 8], [2, 4, 6],
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6],
         ];
         for (let i = 0; i < lines.length; i++) {
-          const [a, b, c] = lines[i];
-          if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-            return squares[a];  
-          }
+            const [a, b, c] = lines[i];
+            if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+                return squares[a];
+            }
         }
         return null;
-      }
+    }
 };
 
 export default GameBoard;
