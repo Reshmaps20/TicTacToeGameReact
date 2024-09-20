@@ -5,19 +5,24 @@ const GameBoard = () => {
     const [squares, setSquares] = useState(Array(9).fill(null));
     const [isXNext, setIsXNext] = useState(true);
     const [winner, setWinner] = useState(null);
+    const [isDraw, setIsDraw] = useState(false); 
 
     const handleClick = (index) => {
 
-        if (winner) {
+        if (squares[index] || winner) {
             return;
         }
 
         const newSquares = squares.slice();
-        if (newSquares[index] === null) {
-            newSquares[index] = isXNext ? 'X' : 'O';
-            setSquares(newSquares);
-            const winner = calculateWinner(newSquares);
-            setWinner(winner);
+        newSquares[index] = isXNext ? 'X' : 'O';
+        setSquares(newSquares);
+
+        const gameWinner = calculateWinner(newSquares);
+        if (gameWinner) {
+            setWinner(gameWinner);
+        } else if (newSquares.every(square => square !== null)) {
+            setIsDraw(true); 
+        } else {
             setIsXNext(!isXNext);
         }
     };
@@ -33,7 +38,7 @@ const GameBoard = () => {
     return (
         <div role="grid">
             <h1>Tic Tac Toe Game</h1>
-            <div role="status" className="status">  {winner ? `Winner: ${winner}` : `Next player: ${isXNext ? 'X' : 'O'}`}</div>
+            <div role="status" className="status"> {winner ? `Winner: ${winner}` : isDraw ? "Game is a Draw" : `Next player: ${isXNext ? 'X' : 'O'}`}</div>
             {renderRow(0)}
             {renderRow(3)}
             {renderRow(6)}

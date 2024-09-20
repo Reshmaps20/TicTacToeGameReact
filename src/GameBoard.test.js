@@ -161,4 +161,28 @@ describe('GameBoard Component', () => {
         expect(buttons[7]).toHaveTextContent(''); 
         expect(buttons[8]).toHaveTextContent(''); 
     })
+
+    test('game detects a draw when all squares are filled without a winner', () => {
+      
+        const buttons = screen.getAllByRole('button');
+      
+        fireEvent.click(buttons[0]); 
+        fireEvent.click(buttons[1]);
+        fireEvent.click(buttons[2]); 
+        fireEvent.click(buttons[4]); 
+        fireEvent.click(buttons[3]); 
+        fireEvent.click(buttons[5]); 
+        fireEvent.click(buttons[7]); 
+        fireEvent.click(buttons[6]); 
+        fireEvent.click(buttons[8]); 
+      
+        const statusElement = screen.getByText(/Game is a Draw/i);
+        expect(statusElement).toBeInTheDocument();
+      
+        fireEvent.click(buttons[0]); 
+        fireEvent.click(buttons[6]); 
+      
+        expect(buttons[0]).toHaveTextContent('X');
+        expect(buttons[6]).toHaveTextContent('O');
+    })
 })
