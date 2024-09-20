@@ -138,4 +138,27 @@ describe('GameBoard Component', () => {
         const statusElement = screen.getByRole('status');
         expect(statusElement).toHaveTextContent('Winner: X');
     })
+
+    test('game should be over after a win is declared', () => {
+      
+        const buttons = screen.getAllByRole('button');
+      
+        fireEvent.click(buttons[0]); 
+        fireEvent.click(buttons[3]); 
+        fireEvent.click(buttons[1]); 
+        fireEvent.click(buttons[4]); 
+        fireEvent.click(buttons[2]); 
+      
+        const statusElement = screen.getByText(/Winner:/i);
+        expect(statusElement).toHaveTextContent('Winner: X');
+      
+        fireEvent.click(buttons[6]); 
+        fireEvent.click(buttons[7]); 
+        fireEvent.click(buttons[8]); 
+      
+        expect(statusElement).toHaveTextContent('Winner: X'); 
+        expect(buttons[6]).toHaveTextContent(''); 
+        expect(buttons[7]).toHaveTextContent(''); 
+        expect(buttons[8]).toHaveTextContent(''); 
+    })
 })

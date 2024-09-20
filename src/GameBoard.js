@@ -7,6 +7,11 @@ const GameBoard = () => {
     const [winner, setWinner] = useState(null);
 
     const handleClick = (index) => {
+
+        if (winner) {
+            return;
+        }
+
         const newSquares = squares.slice();
         if (newSquares[index] === null) {
             newSquares[index] = isXNext ? 'X' : 'O';
